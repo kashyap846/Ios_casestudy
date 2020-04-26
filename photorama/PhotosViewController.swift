@@ -26,20 +26,17 @@ class PhotosViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-
+        self.fetchAllImages()
+        //if()
         store.fetchInterestingPhotos{
             (photosResult) -> Void in
             switch photosResult {
             case let .success(photos):
                 //self.photoArray = photos
                 print("successfully saved all \(photos.count) photos")
-//                if let firstPhoto = photos.first {
-//                    self.updateImageView(for: firstPhoto)
-//                }
-               self.fetchAllImages()
-                //self.updateDatasource()
-            case let .failure(error):
-                print("Error fatching interesting photos: \(error)")
+                self.fetchAllImages()
+                case let .failure(error):
+                print("Error fetching interesting photos from database: \(error)")
             }
         }
         // Do any additional setup after loading the view.
