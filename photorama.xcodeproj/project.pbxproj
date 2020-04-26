@@ -18,8 +18,9 @@
 		32CACBCE242977B0009EAFE2 /* PhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32CACBCD242977B0009EAFE2 /* PhotosViewController.swift */; };
 		32CACBD024297854009EAFE2 /* FlickrAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32CACBCF24297854009EAFE2 /* FlickrAPI.swift */; };
 		32CACBD224297E4D009EAFE2 /* PhotoStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32CACBD124297E4C009EAFE2 /* PhotoStore.swift */; };
-		32CACBD4242982B5009EAFE2 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32CACBD3242982B5009EAFE2 /* Photo.swift */; };
 		9F82A45F245506E600FDE1A7 /* Photorama.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9F82A45D245506E600FDE1A7 /* Photorama.xcdatamodeld */; };
+		9F82A46224550C0100FDE1A7 /* Photo+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F82A46024550C0100FDE1A7 /* Photo+CoreDataClass.swift */; };
+		9F82A46324550C0100FDE1A7 /* Photo+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F82A46124550C0100FDE1A7 /* Photo+CoreDataProperties.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,8 +58,9 @@
 		32CACBCD242977B0009EAFE2 /* PhotosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosViewController.swift; sourceTree = "<group>"; };
 		32CACBCF24297854009EAFE2 /* FlickrAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlickrAPI.swift; sourceTree = "<group>"; };
 		32CACBD124297E4C009EAFE2 /* PhotoStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoStore.swift; sourceTree = "<group>"; };
-		32CACBD3242982B5009EAFE2 /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
 		9F82A45E245506E600FDE1A7 /* Photorama.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Photorama.xcdatamodel; sourceTree = "<group>"; };
+		9F82A46024550C0100FDE1A7 /* Photo+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Photo+CoreDataClass.swift"; sourceTree = "<group>"; };
+		9F82A46124550C0100FDE1A7 /* Photo+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Photo+CoreDataProperties.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,13 +111,14 @@
 		32CACB9C2429774E009EAFE2 /* photorama */ = {
 			isa = PBXGroup;
 			children = (
+				9F82A46124550C0100FDE1A7 /* Photo+CoreDataProperties.swift */,
+				9F82A46024550C0100FDE1A7 /* Photo+CoreDataClass.swift */,
 				32CACB9D2429774E009EAFE2 /* AppDelegate.swift */,
 				32CACB9F2429774E009EAFE2 /* SceneDelegate.swift */,
 				32CACBA12429774E009EAFE2 /* ViewController.swift */,
 				32CACBCD242977B0009EAFE2 /* PhotosViewController.swift */,
 				32CACBCF24297854009EAFE2 /* FlickrAPI.swift */,
 				32CACBD124297E4C009EAFE2 /* PhotoStore.swift */,
-				32CACBD3242982B5009EAFE2 /* Photo.swift */,
 				32CACBA32429774E009EAFE2 /* Main.storyboard */,
 				32CACBA624297754009EAFE2 /* Assets.xcassets */,
 				32CACBA824297754009EAFE2 /* LaunchScreen.storyboard */,
@@ -274,12 +277,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				32CACBD4242982B5009EAFE2 /* Photo.swift in Sources */,
 				9F82A45F245506E600FDE1A7 /* Photorama.xcdatamodeld in Sources */,
 				32CACBA22429774E009EAFE2 /* ViewController.swift in Sources */,
+				9F82A46224550C0100FDE1A7 /* Photo+CoreDataClass.swift in Sources */,
 				32CACBCE242977B0009EAFE2 /* PhotosViewController.swift in Sources */,
 				32CACB9E2429774E009EAFE2 /* AppDelegate.swift in Sources */,
 				32CACBA02429774E009EAFE2 /* SceneDelegate.swift in Sources */,
+				9F82A46324550C0100FDE1A7 /* Photo+CoreDataProperties.swift in Sources */,
 				32CACBD224297E4D009EAFE2 /* PhotoStore.swift in Sources */,
 				32CACBD024297854009EAFE2 /* FlickrAPI.swift in Sources */,
 			);

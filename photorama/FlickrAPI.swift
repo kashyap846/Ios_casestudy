@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import CoreData
 
 enum FlickrError: Error {
     case invalidJSONData
@@ -77,7 +78,8 @@ struct FlickrAPI{
      photos takes 1 paramter data this will be passed in via the json format
      photos return a PhotosResult which is an enum from photoStore class
      */
-    static func photos(fromJSON data: Data) -> PhotosResult {
+    static func photos(fromJSON data: Data,
+                       into context: NSManagedObjectContext) -> PhotosResult {
         do{
             let jsonObject = try JSONSerialization.jsonObject(with: data, options: [])
             guard
@@ -90,7 +92,7 @@ struct FlickrAPI{
             
             var finalPhotos = [Photo]()
             for photoJSON in photosArray{
-                if let photo = photo(fromJSON: photoJSON){
+                if let photo = photo(fromJSON: photoJSON,into: context){
                     finalPhotos.append(photo)
                 }
             }
@@ -108,7 +110,8 @@ struct FlickrAPI{
      Photo will have 1 paramter named json, this will be a dictionary with key String and value of Any
      it will return and optional Photo, which is a class created by us
      */
-    private static func photo(fromJSON json: [String:Any]) -> Photo? {
+    private static func photo(fromJSON json: [String:Any],
+                              into context: NSManagedObjectContext) -> Photo? {
         guard
             let photoID = json["id"] as? String,
             let title = json["title"] as? String,
@@ -118,6 +121,28 @@ struct FlickrAPI{
             let dateTaken = dateFormatter.date(from: dateString) else {
                 return nil
         }
-        return Photo(title: title, photoID: photoID, remoteURL: url, dateTaken: dateTaken)
+        //return Photo(title: title, photoID: photoID, remoteURL: url, dateTaken: dateTaken)
+        let fetchRequest: NSFetchRequest<Photo>  = Photo.fetchRequest()
+        let predicate = NSPredicate(format: "\(#keyPath(Photo.photoID)) == \(photoID)")
+        fetchRequest.predicate = predicate
+        var fetchedPhotos: [Photo]?
+        context.performAndWait {
+            fetchedPhotos  = try? fetchRequest.execute()
+        }
+        if let existingPhoto = fetchedPhotos?.first {
+            return existingPhoto
+        }
+        
+        
+        
+        var photo: Photo!
+        context.performAndWait {
+            photo = Photo(context: context)
+            photo.title = title
+            photo.photoID = photoID
+            photo.remoteURL = url as NSURL
+            photo.dateTaken = dateTaken as NSDate as Date
+        }
+        return photo
     }
 }

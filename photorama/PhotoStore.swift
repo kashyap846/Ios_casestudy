@@ -11,6 +11,7 @@
  this file contains a few important enums for error checking and a class named PhotoStore that we will be using to retreive and store all the information about the photos
  */
 import UIKit
+import CoreData
 
 enum ImageResult {
     case success(UIImage)
@@ -34,6 +35,16 @@ class PhotoStore{
         let config = URLSessionConfiguration.default
         return URLSession(configuration: config)
     }()
+    let persistentContainer : NSPersistentContainer = {
+        let container = NSPersistentContainer(name: "Photorama")
+        container.loadPersistentStores{(description, error) in
+            if let error = error{
+                print("Error setting up core data  \(error)")
+                
+            }
+        }
+        return container
+    }()
     
     /*
      fetchInterestingPhotos will do exactly like the name implies it will get interesting photos
@@ -49,7 +60,16 @@ class PhotoStore{
             // this is a closure statement, it is much like an annonamous function. dataTask requires a second parameter named completionHandler of type (data, response, error) -> Void. since this is a function we can instead use a closure
             (data, response, error) -> Void in
             
-            let result = self.processPhotosRequest(data: data, error: error)
+            var result = self.processPhotosRequest(data: data, error: error)
+            
+            if case .success = result{
+                do{
+                    try self.persistentContainer.viewContext.save()
+                    
+                }catch let error {
+                    result = .failure(error)
+                }
+            }
             OperationQueue.main.addOperation {
                 completion(result)
             }
@@ -61,8 +81,10 @@ class PhotoStore{
     // this function will fetch the image in question, the above function will allow you to retreive information about lots of images, but not the actual image, only where to find it.
     func fetchImage(for photo: Photo, completion: @escaping (ImageResult) -> Void){
         
-        let photoURL = photo.remoteURL
-        let request = URLRequest(url: photoURL)
+        guard let photoURL = photo.remoteURL else{
+            preconditionFailure("Photo expected to have a remote URL")
+        }
+        let request = URLRequest(url: photoURL as! URL)
         
         let task = session.dataTask(with: request){
             (data, response, error) -> Void in
@@ -95,6 +117,22 @@ class PhotoStore{
             return .failure(error!)
         }
         
-        return FlickrAPI.photos(fromJSON: jsonData)
+        return FlickrAPI.photos(fromJSON: jsonData,into: persistentContainer.viewContext)
+    }
+    
+    func fetchAllPhotos(completion: @escaping (PhotosResult) -> Void) {
+        let fetchRequest: NSFetchRequest<Photo> = Photo.fetchRequest()
+        let sortByDateTaken = NSSortDescriptor(key: #keyPath(Photo.dateTaken),ascending: true)
+        fetchRequest.sortDescriptors = [sortByDateTaken]
+        let viewContext = persistentContainer.viewContext
+        viewContext.perform {
+            do{
+                let allPhotos = try viewContext.fetch(fetchRequest)
+                completion(.success(allPhotos))
+                
+            }catch {
+                completion(.failure(error))
+            }
+        }
     }
 }
