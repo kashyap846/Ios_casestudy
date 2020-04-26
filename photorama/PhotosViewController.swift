@@ -36,7 +36,8 @@ class PhotosViewController: UIViewController {
 //                if let firstPhoto = photos.first {
 //                    self.updateImageView(for: firstPhoto)
 //                }
-                self.fetchAllImages()
+               self.fetchAllImages()
+                //self.updateDatasource()
             case let .failure(error):
                 print("Error fatching interesting photos: \(error)")
             }
@@ -70,6 +71,18 @@ class PhotosViewController: UIViewController {
             case let .failure(error):
                 print("Error downloading image: \(error)")
             }
+        }
+    }
+    
+    private func updateDatasource(){
+        store.fetchAllPhotos{(PhotoResult) in
+            switch PhotoResult{
+            case let .success(photos):
+                self.photoArray = photos
+            case let .failure:
+                self.photoArray.removeAll()
+            }
+            
         }
     }
     

@@ -112,6 +112,7 @@ struct FlickrAPI{
      */
     private static func photo(fromJSON json: [String:Any],
                               into context: NSManagedObjectContext) -> Photo? {
+        print("jsonnnn\(json)")
         guard
             let photoID = json["id"] as? String,
             let title = json["title"] as? String,
