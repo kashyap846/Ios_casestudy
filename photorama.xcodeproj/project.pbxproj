@@ -19,6 +19,7 @@
 		32CACBD024297854009EAFE2 /* FlickrAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32CACBCF24297854009EAFE2 /* FlickrAPI.swift */; };
 		32CACBD224297E4D009EAFE2 /* PhotoStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32CACBD124297E4C009EAFE2 /* PhotoStore.swift */; };
 		32CACBD4242982B5009EAFE2 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32CACBD3242982B5009EAFE2 /* Photo.swift */; };
+		9F82A45F245506E600FDE1A7 /* Photorama.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9F82A45D245506E600FDE1A7 /* Photorama.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +58,7 @@
 		32CACBCF24297854009EAFE2 /* FlickrAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlickrAPI.swift; sourceTree = "<group>"; };
 		32CACBD124297E4C009EAFE2 /* PhotoStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoStore.swift; sourceTree = "<group>"; };
 		32CACBD3242982B5009EAFE2 /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
+		9F82A45E245506E600FDE1A7 /* Photorama.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Photorama.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,6 +120,7 @@
 				32CACBA624297754009EAFE2 /* Assets.xcassets */,
 				32CACBA824297754009EAFE2 /* LaunchScreen.storyboard */,
 				32CACBAB24297754009EAFE2 /* Info.plist */,
+				9F82A45D245506E600FDE1A7 /* Photorama.xcdatamodeld */,
 			);
 			path = photorama;
 			sourceTree = "<group>";
@@ -272,6 +275,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				32CACBD4242982B5009EAFE2 /* Photo.swift in Sources */,
+				9F82A45F245506E600FDE1A7 /* Photorama.xcdatamodeld in Sources */,
 				32CACBA22429774E009EAFE2 /* ViewController.swift in Sources */,
 				32CACBCE242977B0009EAFE2 /* PhotosViewController.swift in Sources */,
 				32CACB9E2429774E009EAFE2 /* AppDelegate.swift in Sources */,
@@ -600,6 +604,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		9F82A45D245506E600FDE1A7 /* Photorama.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				9F82A45E245506E600FDE1A7 /* Photorama.xcdatamodel */,
+			);
+			currentVersion = 9F82A45E245506E600FDE1A7 /* Photorama.xcdatamodel */;
+			path = Photorama.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 32CACB922429774E009EAFE2 /* Project object */;
 }
