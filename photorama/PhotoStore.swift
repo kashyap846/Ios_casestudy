@@ -99,7 +99,7 @@ class PhotoStore{
             }
         }
         task.resume()
-    }s
+    }
     
     func fetchAllPhotos(completion: @escaping (PhotosResult) -> Void) {
         let fetchRequest: NSFetchRequest<Photo> = Photo.fetchRequest()
