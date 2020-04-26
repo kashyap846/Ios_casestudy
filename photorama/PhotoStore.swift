@@ -81,6 +81,10 @@ class PhotoStore{
     // this function will fetch the image in question, the above function will allow you to retreive information about lots of images, but not the actual image, only where to find it.
     func fetchImage(for photo: Photo, completion: @escaping (ImageResult) -> Void){
         
+        guard let photoKey = photo.photoID else{
+            preconditionFailure("Photo expected to have a photoID")
+        }
+        
         guard let photoURL = photo.remoteURL else{
             preconditionFailure("Photo expected to have a remote URL")
         }

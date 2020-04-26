@@ -31,16 +31,33 @@ class PhotosViewController: UIViewController {
             (photosResult) -> Void in
             switch photosResult {
             case let .success(photos):
-                self.photoArray = photos
-                print("successfully found \(photos.count) photos")
-                if let firstPhoto = photos.first {
-                    self.updateImageView(for: firstPhoto)
-                }
+                //self.photoArray = photos
+                print("successfully saved all \(photos.count) photos")
+//                if let firstPhoto = photos.first {
+//                    self.updateImageView(for: firstPhoto)
+//                }
+                self.fetchAllImages()
             case let .failure(error):
                 print("Error fatching interesting photos: \(error)")
             }
         }
         // Do any additional setup after loading the view.
+    }
+    
+    func fetchAllImages(){
+        store.fetchAllPhotos{
+            (photosResult) -> Void in
+            switch photosResult {
+            case let .success(photosArray):
+                print("successfully fetched all \(photosArray.count) photos")
+                self.photoArray = photosArray
+                if let startingPhoto = photosArray.first{
+                    self.updateImageView(for: startingPhoto)
+                }
+            case let .failure(error):
+                print("Error fetching images from database: \(error)")
+            }
+    }
     }
     
     func updateImageView(for photo: Photo){
